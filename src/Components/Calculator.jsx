@@ -1,7 +1,7 @@
 import { useState } from "react";
+import './ComponentStyle.css';
 
-export default function Calculator(props) {
-    //const [inputCalc, setInputCaldDisplay] = useState(0);
+export default function Calculator() {
     const [calc, setCalc] = useState('');
     const [result, setResult] = useState('');
 
@@ -15,7 +15,6 @@ export default function Calculator(props) {
             return;
         }
 
-
         setCalc(calc + value);
 
         if (!ops.includes(value)) {
@@ -28,11 +27,7 @@ export default function Calculator(props) {
 
         for (let i = 1; i < 10; i++) {
             digits.push(
-                <button onClick={() => 
-                    updateCalc(i.toString())} 
-                    key={i}>
-                    {i}
-                </button>
+                <button onClick={() => updateCalc(i.toString())} key={i}> {i} </button>
             )
         }
         return digits;
@@ -62,21 +57,22 @@ export default function Calculator(props) {
                     &nbsp;
                     { calc || "0" }
                 </div>
-                <div className="operators">
-                    <button onClick={() => updateCalc('+')}>+</button>
-                    <button onClick={() => updateCalc('-')}>-</button>
-                    <button onClick={() => updateCalc('/')}>/</button>
-                    <button onClick={() => updateCalc('*')}>*</button>
-
-                    {/* <button >C</button> */}
-                    <button onClick={deleteLast}>DEL</button>
+                <div className="containerAllBtns">
+                    <button className="delBtn" onClick={deleteLast}>DEL</button>
+                <div className="containerBtns">
+                    <div className="operators">
+                        <button onClick={() => updateCalc('+')}>+</button>
+                        <button onClick={() => updateCalc('-')}>-</button>
+                        <button onClick={() => updateCalc('/')}>/</button>
+                        <button onClick={() => updateCalc('*')}>*</button>
+                    </div>
+                    <div className="btns-0-9-point">
+                        {createDigits()}
+                        <button onClick={() => updateCalc('0')}>0</button>
+                        <button onClick={() => updateCalc('.')}>.</button>
+                        <button onClick={calculate}>=</button> 
+                    </div>
                 </div>
-                <div className="">
-                    {createDigits()}
-                    <button onClick={() => updateCalc('0')}>0</button>
-                    <button onClick={() => updateCalc('.')}>.</button>
-
-                    <button onClick={calculate}>=</button>  
                 </div>
             </div>
         </div>
