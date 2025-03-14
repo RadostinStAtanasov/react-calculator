@@ -14,6 +14,9 @@ export default function Calculator() {
         ) {
             return;
         }
+        if (calc.length === 0 && value === '0') {
+            return;
+        }
 
         setCalc(calc + value);
 
@@ -44,7 +47,11 @@ export default function Calculator() {
 
         const value = calc.slice(0, -1);
 
-        setCalc(value)
+        setCalc(value);
+    }
+
+    const clearDisplay = () => {
+        setCalc('');
     }
 
 
@@ -53,12 +60,13 @@ export default function Calculator() {
         <div className="App">
             <div className="calculator">
                 <div className="display">
-                    {result ? <span>({result})</span> : ''}
-                    &nbsp;
+                    {/* {result ? <span>({result})</span> : ''}
+                    &nbsp; */}
                     { calc || "0" }
                 </div>
                 <div className="containerAllBtns">
-                    <button className="delBtn" onClick={deleteLast}>DEL</button>
+                    <button className="delBtn" onClick={deleteLast}>BKSP</button>
+                    <button className="clearBtn" onClick={clearDisplay}>CL</button>
                 <div className="containerBtns">
                     <div className="operators">
                         <button onClick={() => updateCalc('+')}>+</button>
